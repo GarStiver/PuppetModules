@@ -3,5 +3,7 @@
 - [x] First commits made
 - [ ] First homework done
 
+![Empty room](
+
 Copyright 2017 Teemu Kruteleff
 
