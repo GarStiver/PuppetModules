@@ -81,4 +81,4 @@ Notice: Compiled catalog for krutelpc.pp.htv.fi in environment production in 0.7
 Notice: /Stage[main]/Apache/File[/var/www/html/index.html]/content: content changed '{md5}319daf69bc09fc4232402a0488a2ef56' to '{md5}b10a8db164e0754105b7a99be72e3fe5'
 Notice: Finished catalog run in 21.98 seconds
 ```
-![alt text](https://github.com/GarStiver/PuppetModules/localhost.png "locahost picture")
+![alt text](https://github.com/GarStiver/PuppetModules/secondhomework/localhost.png "locahost picture")
