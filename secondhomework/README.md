@@ -81,4 +81,55 @@ Notice: Compiled catalog for krutelpc.pp.htv.fi in environment production in 0.7
 Notice: /Stage[main]/Apache/File[/var/www/html/index.html]/content: content changed '{md5}319daf69bc09fc4232402a0488a2ef56' to '{md5}b10a8db164e0754105b7a99be72e3fe5'
 Notice: Finished catalog run in 21.98 seconds
 ```
+Also checked the browser to actually see the changes
 ![alt text](https://github.com/GarStiver/PuppetModules/tree/master/secondhomework/localhost.png "locahost picture")
+
+Lastly I added the part where module ensures that apache2 is running
+
+```
+class apacheconf {
+	package {'apache2':
+		ensure => 'installed',
+		before => Service['apache2'],
+	}
+	file {'/var/www/html/index.html':
+		content => "Life is more than a simple series of ones and zeroes",
+		before => Service ['apache2'],
+	}
+	service {'apache2':
+		ensure => 'running',
+		require => [
+			Package['apache2'],
+			File['/var/www/html/index.html'],
+		]
+	}
+}
+```
+
+Also for the module to run the resources in certain order I added before and require attributes to the module. Here both package and file run before service and service requires both package and file to have run before executing the ensure => running command.
+
+Again I ran the module
+
+> $sudo puppet apply -e 'class {'apacheconf':}'
+
+```
+Notice: Compiled catalog for krutelpc.pp.htv.fi in environment production in 1.11 seconds
+Notice: /Stage[main]/Apacheconf/Package[apache2]/ensure: ensure changed 'purged' to 'present'
+Notice: /Stage[main]/Apacheconf/File[/var/www/html/index.html]/content: content changed '{md5}b10a8db164e0754105b7a99be72e3fe5' to '{md5}319daf69bc09fc4232402a0488a2ef56'
+Notice: Finished catalog run in 22.31 seconds
+```
+
+## Conclusion
+
+This exercise took a couple of hours to finish. The hardest part was probaply to write everything is markdown as I have never used that before. The actual exercise to create the puppet module was not too hard. In the next exercise I am propably going to continue from here using the same module and editing it further.
+
+## Sources
+
+Tero Karvinen
+http://terokarvinen.com/2017/aikataulu-%e2%80%93-linuxin-keskitetty-hallinta-%e2%80%93-ict4tn011-11-%e2%80%93-loppukevat-2017-p2
+
+Puppet
+https://docs.puppet.com/puppet/latest/lang_relationships.html#packagefileservice
+
+Github
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#lines
