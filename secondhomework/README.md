@@ -37,3 +37,8 @@ After removing the service I created a new folder in the /etc/puppet -folder for
 
 > $mkdir /etc/puppet/modules/apacheconf/manifests
 
+And after creating the folder I created the init.pp -file
+
+> sudoedit init.pp
+
+
