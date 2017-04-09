@@ -6,5 +6,7 @@ The puppet modules created during this exercise are free to use.
 PC in use:
 
 OS: Xubuntu 16.04.1 LTS
+
 CPU: AMD A10-4655 APU 2.0GHz
+
 RAM: 8.00gb
