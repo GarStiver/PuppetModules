@@ -50,3 +50,34 @@ class apacheconf {
 	}
 }
 ```
+Next I ran the module I created above
+
+> $sudo puppet apply -e 'class {'apacheconf':}'
+
+I received the following output
+```
+Notice: Compiled catalog for krutelpc.pp.htv.fi in environment production in 0.78 seconds
+Notice: /Stage[main]/Apache/Package[apache2]/ensure: ensure changed 'purged' to 'present'
+Notice: Finished catalog run in 21.98 seconds
+```
+Next I decided to add the File -resource to the module. 
+
+```
+class apacheconf {
+	package {'apache2':
+		ensure => 'installed',
+	}
+	file {'/var/www/html/index.hmtl':
+		content => 'Life is more than a simple series of ones and zeroes',
+	}
+}
+```
+Again I ran the module to check the results
+
+> $sudo puppet apply -e 'class {'apacheconf':}'
+
+```
+Notice: Compiled catalog for krutelpc.pp.htv.fi in environment production in 0.78 seconds
+Notice: /Stage[main]/Apache/File[/var/www/html/index.html]/content: content changed '{md5}319daf69bc09fc4232402a0488a2ef56' to '{md5}b10a8db164e0754105b7a99be72e3fe5'
+Notice: Finished catalog run in 21.98 seconds
+```
