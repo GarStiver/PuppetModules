@@ -121,7 +121,7 @@ Notice: Finished catalog run in 22.31 seconds
 
 ## Conclusion
 
-This exercise took a couple of hours to finish. The hardest part was probaply to write everything is markdown as I have never used that before. The actual exercise to create the puppet module was not too hard. In the next exercise I am propably going to continue from here using the same module and editing it further.
+This exercise took a couple of hours to finish. The hardest part was propably to write everything in markdown as I have never used that before. The actual exercise to create the puppet module was not too hard. In the next exercise I am propably going to continue from here using the same module and editing it further.
 
 ## Sources
 
