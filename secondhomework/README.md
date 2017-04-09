@@ -43,10 +43,10 @@ And after creating the folder I created the init.pp -file
 
 After creating the init.pp I started programming the puppet module. The first thing I decided to do with the module was I simply want it to install apache2 on my system.
 
-'''
+```
 class apacheconf {
 	package {'apache2':
 		ensure => 'installed',
 	}
 }
-'''
+```
