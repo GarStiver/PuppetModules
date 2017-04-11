@@ -82,7 +82,7 @@ Notice: /Stage[main]/Apache/File[/var/www/html/index.html]/content: content chan
 Notice: Finished catalog run in 21.98 seconds
 ```
 Also checked the browser to actually see the changes
-![alt-text](https://github.com/GarStiver/PuppetModules/tree/master/secondhomework/localhost.png "locahost picture")
+![alt-text](https://github.com/GarStiver/PuppetModules/secondhomework/localhost.png "locahost picture")
 
 Lastly I added the part where module ensures that apache2 is running
 
