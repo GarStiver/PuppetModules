@@ -1,19 +1,17 @@
 class ssh {	
-	package {"ssh":
-		ensure => installed,
+	package {"openssh-server":
+		ensure => "installed",
 	}
 	
-	service {'ssh':
+	service {"sshd":
 		ensure => "running",
 		enable => "true",
 		require => Package["ssh"],
 	}
 	
-	file {'/etc/ssh/sshd_config':
-		content => template('ssh/sshd_config.erb'),
-		require => Package['ssh'],
-		notify => Service["ssh"],
-		owner => "root",
-		group => "root",
+	file {"/etc/ssh/sshd_config":
+		content => template('sshd/sshd_config.erb'),
+		require => Package["ssh"],
+		notify => Service["sshd"],
 	}
 }
