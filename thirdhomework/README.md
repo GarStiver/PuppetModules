@@ -147,5 +147,5 @@ Notice: Finished catalog run in 25.97 seconds
 
 To actually see that the module worked I navigated to the localhost page on my browser and it showed the following page:
 
-[!alt-text](https://github.com/GarStiver/PuppetModules/tree/master/thirdhomework/localhost.png "localhost")
+![alt-text](https://github.com/GarStiver/PuppetModules/blob/master/thirdhomework/localhost.png "localhost")
 
