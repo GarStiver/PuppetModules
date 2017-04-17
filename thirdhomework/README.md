@@ -131,7 +131,7 @@ $sudo puppet apply --modulepath ~/PuppetModules/thirdhomework/modules/ -e 'class
 ```
 
 I received the following output. Here the first line tells us that the package has been installed. The next line tells us that the 000-default.conf has been removed from the sites-enabled directory. After this the module has created the public_html-directory and created the index.html file there with the content described above in the module.
-After this the teemu.conf-file was created and the template was put there. And after creating the conf-file the link to the sites-enabled directory is created. And finally the apache2 has restart after doing all of the above.
+After this the teemu.conf-file was created and the template was put there. And after creating the conf-file the link to the sites-enabled directory is created. And finally the apache2 has restarted after doing all of the above.
 
 ```
 Notice: Compiled catalog for krutelpc.pp.htv.fi in environment production in 1.08 seconds
