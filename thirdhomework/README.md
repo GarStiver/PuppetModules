@@ -76,8 +76,62 @@ Notice: Finished catalog run in 0.40 seconds
 ```
 ### Creating the apacheconf module
 
+Next I decided to create the apacheconf module. I already had the basis for it from the previous homework so this did not require too much work to do. The module can be found below: 
 
+```
+class apacheconf {
+	package{'apache2':
+		ensure => 'installed',
+	}
 
+	service{'apache2':
+		ensure => 'running',
+		enable => 'true',
+		require => Package['apache2'],
+	}
+	
+	file{'/home/teemu/public_html':
+		ensure => 'directory',
+		owner => 'teemu',
+		group => 'teemu',
+	}
+	
+	file{'/home/teemu/public_html/index.html':
+		ensure => 'file',
+		content => "Hello World",
+		owner => 'teemu',
+		group => 'teemu',
+	}
+
+	file{'/etc/apache2/sites-available/teemu.conf':
+		content => template('apacheconf/teemu.conf.erb'),
+		require => Package['apache2'],
+		owner => 'root',
+		group => 'root',
+	}
+	
+	file{'/etc/apache2/sites-enabled/teemu.conf':
+		ensure => 'link',
+		target => '/etc/apache2/sites-available/teemu.conf',
+		notify => Service['apache2'],
+		require => Package['apache2'],
+	}
+	
+	file{'/etc/apache2/sites-enabled/000-default.conf':
+		ensure => 'absent',
+		notify => Service['apache2'],
+		require => Package['apache2'],
+	}
+}
+```
+After creating the module I ran it with the following command:
+
+```
+$sudo puppet apply --modulepath ~/PuppetModules/thirdhomework/modules/ -e 'class {'apacheconf':}'
+```
+
+I received the following output. Here the first line tells us that the package has been installed. The next line tells us that the 000-default.conf has been removed from the sites-enabled directory. After this the module has created the public_html-directory and created the index.html file there with the content described above in the module.
+After this the teemu.conf-file was created and the template was put there. And after creating the conf-file the link to the sites-enabled directory is created. And finally the apache2 has restart after doing all of the above.
 
 ```
 Notice: Compiled catalog for krutelpc.pp.htv.fi in environment production in 1.08 seconds
