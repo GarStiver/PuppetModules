@@ -144,3 +144,8 @@ Notice: /Stage[main]/Apacheconf/File[/etc/apache2/sites-enabled/teemu.conf]/ensu
 Notice: /Stage[main]/Apacheconf/Service[apache2]: Triggered 'refresh' from 2 events
 Notice: Finished catalog run in 25.97 seconds
 ```
+
+To actually see that the module worked I navigated to the localhost page on my browser and it showed the following page:
+
+[!alt-text](https://github.com/GarStiver/PuppetModules/tree/master/thirdhomework/localhost.png "localhost")
+
