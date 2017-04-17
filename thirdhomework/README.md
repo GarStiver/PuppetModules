@@ -149,3 +149,15 @@ To actually see that the module worked I navigated to the localhost page on my b
 
 ![alt-text](https://github.com/GarStiver/PuppetModules/blob/master/thirdhomework/localhost.png "localhost")
 
+It works!
+
+## Conclusion
+
+This exercise was not too difficult. The hardest part again was to write everything using the markdown language. Other than that I had little to no difficulties doing this exercise.
+
+## Sources
+
+Tero Karvinen
+http://terokarvinen.com/2016/new-default-website-with-apache2-show-your-homepage-at-top-of-example-com-no-tilde
+
+
