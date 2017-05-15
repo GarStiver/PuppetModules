@@ -16,6 +16,7 @@ RAM: 8.00gb
 Before starting to do the actual project I did the necessary preparations as follows:
 
 > $sudo apt-get update
+
 > $sudo apt-get -y upgrade 
 
 ## Starting the project
@@ -55,6 +56,39 @@ Notice: Compiled catalog for xubuntu.pp.htv.fi in enviroment production in 0.25 
 Notice: /Stage[main]/Git/Package[git]/ensure: ensure changed 'purged' to 'present'
 Notice: Finished catalog run in 4.44 seconds
 ```
+### Creating the Atom module
 
+Next I decided to create a module that installs the Atom editor.
+I started with creating a directory for this module as well.
 
- 
+> $mkdir /etc/puppet/modules/extract/manifests
+
+And inside that directory the init.pp-file
+
+> $sudoedit init.pp
+
+The entire module can be seen below. At first the module runs the apt-get update command. After running the update command it downloads the wget package and notifys the Exec['Download Atom'] resource. 
+
+```
+class extract{
+	exec{'apt-get update':
+		path => ['/usr/bin'],
+	}
+	package{'wget':
+		ensure => 'installed',
+		require => Exec['apt-get update'],
+		notify => Exec['Download Atom'],
+	}
+	exec{'Download Atom':
+		command => "/usr/bin/wget https://atom.io/download/deb -O /tmp/atom-amd64.deb",
+		require => Package['wget'],
+		timeout => 1800,
+		notify => Package['extract atom'],
+	}
+	package{'extract atom':
+		provider => dpkg,
+		ensure => latest,
+		source => "/tmp/atom-amd64.deb",
+	}
+}
+``` 
