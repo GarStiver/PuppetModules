@@ -1,6 +1,7 @@
 class mysql {
 	package{"mysql-server":
 		ensure => "installed",
+		allowcdrom => "true",
 	}
 	service {"mysql":
 		ensure => "running",
