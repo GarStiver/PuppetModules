@@ -1,4 +1,7 @@
 class mysql {
+	exec{"apt-get update":
+		path => ["'/usr/bin"],
+	}
 	package{"mysql-server":
 		ensure => "installed",
 		allowcdrom => "true",
