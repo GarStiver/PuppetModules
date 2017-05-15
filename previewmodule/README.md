@@ -12,10 +12,49 @@ CPU: AMD A10-4655 APU 2.0GHz
 RAM: 8.00gb
 
 ### Preparations for the project
+
 Before starting to do the actual project I did the necessary preparations as follows:
+
+> $sudo apt-get update
+> $sudo apt-get -y upgrade 
+
+## Starting the project
+
+### Instructions
+
+The object of this project is to create my own module for everyday use that is a bit more complex than the previous ones I have written.
+
+### Creating the git module
+
+I decided to start off this project by writing a module that installs git.
+First I made a directory for the module called git.
+
+> $mkdir /etc/puppet/modules/git/manifests
+
+Inside that directory I create the init.pp-file.
+
+> $sudoedit init.pp
+
+Into that file I wrote the code that can be found below.
 ```
-$sudo apt-get update
-¸¸¸
+class git{
+	package{'git':
+		ensure => 'installed',
+		allowcdrom => 'true',
+	}
+}
 ```
-$sudo apt-get -y upgrade
-``` 
+
+After writing that module I tested it.
+
+> $sudo puppet apply -e 'class{'git':}'
+
+I received the following message.
+```
+Notice: Compiled catalog for xubuntu.pp.htv.fi in enviroment production in 0.25 seconds
+Notice: /Stage[main]/Git/Package[git]/ensure: ensure changed 'purged' to 'present'
+Notice: Finished catalog run in 4.44 seconds
+```
+
+
+ 
