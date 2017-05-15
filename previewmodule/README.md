@@ -104,3 +104,60 @@ Notice: /Stage[main]/Extract/Exec[Download Atom]/returns: executed successfully
 Notice: /Stage[main]/Extract/Package[extract atom]/ensure: ensure changed 'purged' to 'latest'
 Notice: Finished catalog run in 14.80 seconds
 ```
+### Module that installs mysql and changes the root pw
+
+Finally I decided to create a small module that installs the mysql-server, changes the root password and ensures that the service is running.
+For this I also created the directory and the init.pp-file
+> $mkdir /etc/puppet/modules/mysql/manifests
+
+> $sudoedit init.pp
+
+The entire module can be seen below. At first the module installs the mysql-server package, then it executes the exec attribute that changes the root password and finally ensures that mysql is running.
+```
+class mysql {
+	package{"mysql-server":
+		ensure => "installed",
+		allowcdrom => "true",
+	}
+	service {"mysql":
+		ensure => "running",
+		enable => "true",
+		require => Package["mysql-server"],
+	}
+	exec {"mysqlpasswd":
+		command => "/usr/bin/mysqladmin -u root password NewPassword",
+		notify => [Service["mysql"]],
+		require => [Package["mysql-server"]],
+	}
+}
+```
+> $sudo puppet apply -e 'class{'extract':}'
+
+After running the module I received the following message:
+
+```
+Notice: Compiled catalog for teemu-virtualbox.pp.htv.fi in enviroment production in 0.51 seconds
+Notice: /Stage[main]/Mysql/Package[mysql-server]/ensure: ensure changed 'purged' to 'present'
+Notice: /Stage[main]/Mysql/Exec[mysqlpasswd]/returns: executed successfully
+Notice: /Stage[main]/Mysql/Service[mysql]: Triggered 'refresh' from 1 events
+Notice: Finished catalog run in 4.73 seconds
+```
+
+Unfortunately I did not get the mysql module to work on livestick PC. The module requires an installed operating system and apt-get update and apt-get upgrade commands to have been run. I was not able to fix that for this course.
+
+### Creating a bash script that runs all three modules
+
+Lastly I decided to create a small bash script that runs all three modules.
+
+```
+#!/bin/bash
+
+sudo puppet apply --modulepath modules -e 'class{'git':}'
+sudo puppet apply --modulepath modules -e 'class{'mysql':}'
+sudo puppet apply --modulepath modules -e 'class{'extract':}'
+```
+
+## Conclusion
+
+Creating these modules was hard and timeeconsuming but also very interesting ad taught me alot about puppet and puppet development.
+
